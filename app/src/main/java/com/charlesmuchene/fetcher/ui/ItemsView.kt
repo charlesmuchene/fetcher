@@ -18,11 +18,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.charlesmuchene.fetcher.Item
-import com.charlesmuchene.fetcher.Items
+import com.charlesmuchene.fetcher.ItemGroups
 
 @Composable
-fun ItemsView(items: Items, modifier: Modifier = Modifier) {
-    if (items.isEmpty()) {
+fun ItemsView(itemGroups: ItemGroups, modifier: Modifier = Modifier) {
+    if (itemGroups.isEmpty()) {
         Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             Text(
                 text = "No items",
@@ -31,8 +31,10 @@ fun ItemsView(items: Items, modifier: Modifier = Modifier) {
         }
     } else {
         LazyColumn(modifier = modifier.fillMaxSize()) {
-            items(items) { item ->
-                ItemRow(item = item)
+            itemGroups.forEach { (group, items) ->
+                items(items) { item ->
+                    ItemRow(item = item)
+                }
             }
         }
     }
@@ -53,18 +55,21 @@ private fun ItemRow(item: Item, modifier: Modifier = Modifier) {
 @Preview(showSystemUi = true)
 @Composable
 private fun EmptyItems() {
-    ItemsView(emptyList())
+    ItemsView(emptyMap())
 }
 
 @Preview(showSystemUi = true)
 @Composable
 private fun WithItems() {
     ItemsView(
-        items = listOf(
-            Item(1, 1, "Name 1"),
-            Item(2, 2, "Name 2"),
-            Item(3, 3, "Name 3"),
-            Item(4, 4, "Name 4"),
+        itemGroups = mapOf(
+            1 to listOf(
+                Item(id = 1, listId = 1, name = "Name 1"),
+                Item(id = 2, listId = 1, name = "Name 2"),
+            ), 2 to listOf(
+                Item(id = 1, listId = 2, name = "Name 1"),
+                Item(id = 2, listId = 2, name = "Name 2"),
+            )
         ),
         modifier = Modifier.safeDrawingPadding()
     )

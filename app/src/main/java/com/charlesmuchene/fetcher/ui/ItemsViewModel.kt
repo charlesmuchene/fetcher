@@ -1,5 +1,6 @@
 package com.charlesmuchene.fetcher.ui
 
+import com.charlesmuchene.fetcher.ItemGroups
 import com.charlesmuchene.fetcher.Items
 import com.charlesmuchene.fetcher.data.ItemsRepository
 import kotlinx.coroutines.CoroutineDispatcher
@@ -15,8 +16,8 @@ class ItemsViewModel(
     private val dispatcher: CoroutineDispatcher = Dispatchers.Default
 ): CoroutineScope by CoroutineScope(dispatcher) {
 
-    private val _items = MutableStateFlow<Items>(emptyList())
-    val items: StateFlow<Items> = _items.asStateFlow()
+    private val _items = MutableStateFlow<ItemGroups>(emptyMap())
+    val items: StateFlow<ItemGroups> = _items.asStateFlow()
 
     fun fetch() {
         launch {
