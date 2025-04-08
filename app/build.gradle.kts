@@ -39,6 +39,16 @@ android {
     }
 }
 
+kotlin {
+    sourceSets {
+        all {
+            languageSettings.apply {
+                optIn("androidx.compose.foundation.ExperimentalFoundationApi")
+            }
+        }
+    }
+}
+
 dependencies {
 
     implementation(libs.androidx.core.ktx)

@@ -1,9 +1,11 @@
 package com.charlesmuchene.fetcher.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -32,6 +34,16 @@ fun ItemsView(itemGroups: ItemGroups, modifier: Modifier = Modifier) {
     } else {
         LazyColumn(modifier = modifier.fillMaxSize()) {
             itemGroups.forEach { (group, items) ->
+                stickyHeader {
+                    Text(
+                        text = "List Id: $group",
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(Color.LightGray)
+                            .padding(8.dp),
+                        style = typography.headlineSmall
+                    )
+                }
                 items(items) { item ->
                     ItemRow(item = item)
                 }
