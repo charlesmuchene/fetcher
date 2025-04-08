@@ -12,10 +12,14 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import java.io.File
 
-class ItemsDataSource(
+interface ItemsDataSource {
+    suspend fun fetchItems(): Items
+}
+
+class ItemsDataSourceImpl(
     cacheDir: File,
     private val scope: CoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
-) {
+): ItemsDataSource {
 
     private val cache = Cache(File(cacheDir, "cache"), 100 * 1024 /* 100kb */)
     private val client = OkHttpClient().newBuilder().cache(cache).build()
@@ -28,7 +32,7 @@ class ItemsDataSource(
 
     private val api by lazy { retrofit.create(ItemsApi::class.java) }
 
-    suspend fun fetchItems(): Items = scope.async {
+    override suspend fun fetchItems(): Items = scope.async {
         api.items()
     }.await()
 }

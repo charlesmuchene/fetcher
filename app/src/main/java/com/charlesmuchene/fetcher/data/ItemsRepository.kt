@@ -7,7 +7,7 @@ import java.io.File
 
 class ItemsRepository(
     private val cacheDir: File,
-    private val source: ItemsDataSource = ItemsDataSource(cacheDir = cacheDir),
+    private val source: ItemsDataSource = ItemsDataSourceImpl(cacheDir = cacheDir),
 ) {
     suspend fun fetchItems(): ItemGroups {
         val items = source.fetchItems()
