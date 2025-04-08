@@ -12,9 +12,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.lifecycleScope
 import com.charlesmuchene.fetcher.ui.ItemsViewModel
 import com.charlesmuchene.fetcher.ui.ItemsView
 import com.charlesmuchene.fetcher.ui.theme.FetcherTheme
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
 
@@ -38,5 +40,7 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+
+        viewModel.fetch()
     }
 }
