@@ -10,9 +10,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import java.io.File
 
 class ItemsViewModel(
-    private val repository: ItemsRepository = ItemsRepository(),
+    private val cacheDir: File,
+    private val repository: ItemsRepository = ItemsRepository(cacheDir = cacheDir),
     private val dispatcher: CoroutineDispatcher = Dispatchers.Default
 ): CoroutineScope by CoroutineScope(dispatcher) {
 

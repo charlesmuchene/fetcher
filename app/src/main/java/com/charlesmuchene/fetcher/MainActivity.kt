@@ -12,13 +12,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.charlesmuchene.fetcher.ui.ItemsViewModel
 import com.charlesmuchene.fetcher.ui.ItemsView
+import com.charlesmuchene.fetcher.ui.ItemsViewModel
 import com.charlesmuchene.fetcher.ui.theme.FetcherTheme
 
 class MainActivity : ComponentActivity() {
 
-    private val viewModel = ItemsViewModel()
+    private val viewModel by lazy { ItemsViewModel(cacheDir = application.cacheDir) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
